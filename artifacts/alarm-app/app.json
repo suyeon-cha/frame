@@ -14,9 +14,22 @@
       "backgroundColor": "#0A0D1A"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.dualalarm.app",
+      "infoPlist": {
+        "UIBackgroundModes": ["fetch", "remote-notification"]
+      }
     },
-    "android": {},
+    "android": {
+      "package": "com.dualalarm.app",
+      "permissions": [
+        "RECEIVE_BOOT_COMPLETED",
+        "SCHEDULE_EXACT_ALARM",
+        "USE_EXACT_ALARM",
+        "VIBRATE",
+        "POST_NOTIFICATIONS"
+      ]
+    },
     "web": {
       "favicon": "./assets/images/icon.png"
     },
