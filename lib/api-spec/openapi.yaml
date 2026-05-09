@@ -3,13 +3,19 @@ info:
   # Do not change the title, if the title changes, the import paths will be broken
   title: Api
   version: 0.1.0
-  description: API specification
+  description: Cross-device alarm sync API
 servers:
   - url: /api
     description: Base API path
 tags:
   - name: health
     description: Health operations
+  - name: pairs
+    description: Device pair management
+  - name: devices
+    description: Device registration
+  - name: alarms
+    description: Alarm management
 paths:
   /healthz:
     get:
@@ -24,6 +30,183 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+
+  /pairs:
+    post:
+      operationId: createPair
+      tags: [pairs]
+      summary: Create a new device pair
+      description: Generates a unique pair code for linking two devices
+      responses:
+        "201":
+          description: Pair created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pair"
+
+  /pairs/{code}:
+    get:
+      operationId: getPair
+      tags: [pairs]
+      summary: Get pair by code
+      parameters:
+        - name: code
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Pair found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Pair"
+        "404":
+          description: Pair not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /devices:
+    post:
+      operationId: registerDevice
+      tags: [devices]
+      summary: Register a device in a pair
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/DeviceInput"
+      responses:
+        "201":
+          description: Device registered
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Device"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Pair not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /alarms:
+    get:
+      operationId: listAlarms
+      tags: [alarms]
+      summary: List alarms for a pair
+      parameters:
+        - name: pairCode
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: List of alarms
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Alarm"
+        "400":
+          description: Missing pairCode
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    post:
+      operationId: createAlarm
+      tags: [alarms]
+      summary: Create a new alarm
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AlarmInput"
+      responses:
+        "201":
+          description: Alarm created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Alarm"
+        "400":
+          description: Invalid input
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "404":
+          description: Pair not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
+  /alarms/{id}:
+    patch:
+      operationId: updateAlarm
+      tags: [alarms]
+      summary: Update an alarm
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AlarmUpdate"
+      responses:
+        "200":
+          description: Alarm updated
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Alarm"
+        "404":
+          description: Alarm not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    delete:
+      operationId: deleteAlarm
+      tags: [alarms]
+      summary: Delete an alarm
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "204":
+          description: Alarm deleted
+        "404":
+          description: Alarm not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+
 components:
   schemas:
     HealthStatus:
@@ -34,3 +217,117 @@ components:
       required:
         - status
 
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+      required:
+        - error
+
+    Pair:
+      type: object
+      properties:
+        id:
+          type: integer
+        code:
+          type: string
+        createdAt:
+          type: string
+      required:
+        - id
+        - code
+        - createdAt
+
+    Device:
+      type: object
+      properties:
+        id:
+          type: integer
+        pairId:
+          type: integer
+        role:
+          type: string
+          enum: [primary, secondary]
+        createdAt:
+          type: string
+      required:
+        - id
+        - pairId
+        - role
+        - createdAt
+
+    DeviceInput:
+      type: object
+      properties:
+        pairCode:
+          type: string
+        role:
+          type: string
+          enum: [primary, secondary]
+      required:
+        - pairCode
+        - role
+
+    Alarm:
+      type: object
+      properties:
+        id:
+          type: integer
+        pairId:
+          type: integer
+        label:
+          type: string
+        hour:
+          type: integer
+        minute:
+          type: integer
+        enabled:
+          type: boolean
+        createdAt:
+          type: string
+      required:
+        - id
+        - pairId
+        - label
+        - hour
+        - minute
+        - enabled
+        - createdAt
+
+    AlarmInput:
+      type: object
+      properties:
+        pairCode:
+          type: string
+        label:
+          type: string
+        hour:
+          type: integer
+          minimum: 0
+          maximum: 23
+        minute:
+          type: integer
+          minimum: 0
+          maximum: 59
+      required:
+        - pairCode
+        - label
+        - hour
+        - minute
+
+    AlarmUpdate:
+      type: object
+      properties:
+        label:
+          type: string
+        hour:
+          type: integer
+          minimum: 0
+          maximum: 23
+        minute:
+          type: integer
+          minimum: 0
+          maximum: 59
+        enabled:
+          type: boolean

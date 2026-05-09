@@ -5,7 +5,9 @@
  * Cross-device alarm sync API
  * OpenAPI spec version: 0.1.0
  */
+import type { DeviceInputRole } from "./deviceInputRole";
 
-export interface HealthStatus {
-  status: string;
+export interface DeviceInput {
+  pairCode: string;
+  role: DeviceInputRole;
 }
