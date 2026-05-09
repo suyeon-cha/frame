@@ -15,7 +15,14 @@ Notifications.setNotificationHandler({
 export async function requestNotificationPermission(): Promise<boolean> {
   if (Platform.OS === "web") return false;
   try {
-    const { status } = await Notifications.requestPermissionsAsync();
+    const { status } = await Notifications.requestPermissionsAsync({
+      ios: {
+        allowAlert: true,
+        allowBadge: false,
+        allowSound: true,
+        allowCriticalAlerts: true,
+      },
+    });
     return status === "granted";
   } catch {
     return false;
@@ -46,9 +53,18 @@ export async function scheduleAlarmNotifications(
 
       await Notifications.scheduleNotificationAsync({
         content: {
-          title: "Alarm",
+          title: "⏰ DualAlarm",
           body: alarm.label || "Time to wake up!",
           sound: "default",
+          ...(Platform.OS === "ios"
+            ? {
+                ios: {
+                  critical: true,
+                  sound: true,
+                  volume: 1.0,
+                },
+              }
+            : {}),
         },
         trigger: {
           type: Notifications.SchedulableTriggerInputTypes.DAILY,
@@ -76,7 +92,10 @@ export function formatTime(hour: number, minute: number): string {
   return `${h}:${m} ${ampm}`;
 }
 
-export function getSecondaryTime(hour: number, minute: number): { hour: number; minute: number } {
+export function getSecondaryTime(
+  hour: number,
+  minute: number
+): { hour: number; minute: number } {
   let m = minute + 1;
   let h = hour;
   if (m >= 60) {

@@ -18,6 +18,9 @@
       "bundleIdentifier": "com.dualalarm.app",
       "infoPlist": {
         "UIBackgroundModes": ["fetch", "remote-notification"]
+      },
+      "entitlements": {
+        "com.apple.developer.usernotifications.critical-alerts": true
       }
     },
     "android": {
