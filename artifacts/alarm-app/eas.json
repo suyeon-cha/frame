@@ -9,7 +9,7 @@
       "distribution": "internal",
       "ios": {
         "simulator": false,
-        "image": "macos-14-xcode-16"
+        "image": "macos-sequoia-15.6-xcode-16.4"
       }
     },
     "preview": {
@@ -19,13 +19,13 @@
       },
       "ios": {
         "simulator": false,
-        "image": "macos-14-xcode-16"
+        "image": "macos-sequoia-15.6-xcode-16.4"
       }
     },
     "production": {
       "autoIncrement": true,
       "ios": {
-        "image": "macos-14-xcode-16"
+        "image": "macos-sequoia-15.6-xcode-16.4"
       }
     }
   },
