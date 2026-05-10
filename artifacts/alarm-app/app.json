@@ -50,6 +50,14 @@
           "color": "#00C2FF",
           "iosDisplayInForeground": true
         }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "ios": {
+            "deploymentTarget": "26.0"
+          }
+        }
       ]
     ],
     "experiments": {
