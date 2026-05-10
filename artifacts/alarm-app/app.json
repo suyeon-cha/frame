@@ -17,10 +17,8 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.dualalarm.app",
       "infoPlist": {
-        "UIBackgroundModes": ["fetch", "remote-notification"]
-      },
-      "entitlements": {
-        "com.apple.developer.usernotifications.critical-alerts": true
+        "UIBackgroundModes": ["fetch", "remote-notification"],
+        "NSAlarmKitUsageDescription": "DualAlarm needs alarm access to ring on both devices at the right time, even when your phone is silenced."
       }
     },
     "android": {

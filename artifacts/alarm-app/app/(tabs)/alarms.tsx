@@ -64,6 +64,7 @@ export default function AlarmsScreen() {
     { pairCode: pairCode ?? "" },
     {
       query: {
+        queryKey: getListAlarmsQueryKey({ pairCode: pairCode ?? "" }),
         enabled: !!pairCode,
         refetchInterval: 15000,
       },
