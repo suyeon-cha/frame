@@ -1,0 +1,95 @@
+suyeoncha@mac frame % npm install -g pnpm@latest
+
+added 1 package in 1s
+
+1 package is looking for funding
+  run `npm fund` for details
+suyeoncha@mac frame % pnpm install              
+Scope: all 9 workspace projects
+ WARN  Ignoring broken lockfile at /Users/suyeoncha/Documents/Projects/frame: Lockfile /Users/suyeoncha/Documents/Projects/frame/pnpm-lock.yaml not compatible with current pnpm
+/Users/suyeoncha/Documents/Projects/frame/artifacts/alarm-app:
+ ERR_PNPM_SPEC_NOT_SUPPORTED_BY_ANY_RESOLVER  @tanstack/react-query@catalog: isn't supported by any available resolver.
+
+This error happened while installing a direct dependency of /Users/suyeoncha/Documents/Projects/frame/artifacts/alarm-app
+suyeoncha@mac frame % pnpm --version  # should show 10.x.x
+8.15.6
+suyeoncha@mac frame % npm install -g pnpm@latest
+
+changed 1 package in 515ms
+
+1 package is looking for funding
+  run `npm fund` for details
+suyeoncha@mac frame % pnpm --version                      
+8.15.6
+suyeoncha@mac frame % corepack enable
+suyeoncha@mac frame % corepack prepare pnpm@latest --activate
+Preparing pnpm@latest for immediate activation...
+suyeoncha@mac frame % pnpm --version  
+8.15.6
+suyeoncha@mac frame % npm install -g pnpm@10
+
+changed 1 package in 801ms
+
+1 package is looking for funding
+  run `npm fund` for details
+suyeoncha@mac frame % pnpm --version        
+8.15.6
+suyeoncha@mac frame % which -a pnpm
+/opt/homebrew/bin/pnpm
+/usr/local/bin/pnpm
+suyeoncha@mac frame % brew upgrade pnpm
+==> Auto-updating Homebrew...
+Adjust how often this is run with `$HOMEBREW_AUTO_UPDATE_SECS` or disable with
+`$HOMEBREW_NO_AUTO_UPDATE=1`. Hide these hints with `$HOMEBREW_NO_ENV_HINTS=1` (see `man brew`).
+==> Auto-updated Homebrew!
+Updated 3 taps (steipete/tap, homebrew/core and homebrew/cask).
+==> New Formulae
+committed: Nitpicking commit history since beabf39
+crit: Your feedback loop with the agent: review plans and code locally
+dexter-lsp: Elixir LSP optimized for large codebases
+go-hass-agent: Native Home Assistant agent for desktop/laptop devices
+marmot: Open-source data catalog exposing metadata to AI agents
+plutosvg: Tiny SVG rendering library in C
+smlnj: Compiler and programming system for Standard ML
+sol2: C++ <-> Lua API wrapper with advanced features and top notch performance
+steipete/tap/clawdex
+steipete/tap/telecrawl
+vtzero: Minimalist vector tile decoder and encoder in C++
+zapp: Flash ZSA keyboards from your terminal
+
+You have 63 outdated formulae installed.
+
+Error: pnpm not installed
+suyeoncha@mac frame % pnpm install                        
+Scope: all 9 workspace projects
+ WARN  Ignoring broken lockfile at /Users/suyeoncha/Documents/Projects/frame: Lockfile /Users/suyeoncha/Documents/Projects/frame/pnpm-lock.yaml not compatible with current pnpm
+/Users/suyeoncha/Documents/Projects/frame/artifacts/alarm-app:
+ ERR_PNPM_SPEC_NOT_SUPPORTED_BY_ANY_RESOLVER  @tanstack/react-query@catalog: isn't supported by any available resolver.
+
+This error happened while installing a direct dependency of /Users/suyeoncha/Documents/Projects/frame/artifacts/alarm-app
+suyeoncha@mac frame % which -a pnpm    
+/opt/homebrew/bin/pnpm
+/usr/local/bin/pnpm
+suyeoncha@mac frame % brew upgrade pnpm
+Error: pnpm not installed
+suyeoncha@mac frame % pnpm install     
+Scope: all 9 workspace projects
+ WARN  Ignoring broken lockfile at /Users/suyeoncha/Documents/Projects/frame: Lockfile /Users/suyeoncha/Documents/Projects/frame/pnpm-lock.yaml not compatible with current pnpm
+/Users/suyeoncha/Documents/Projects/frame/artifacts/alarm-app:
+ ERR_PNPM_SPEC_NOT_SUPPORTED_BY_ANY_RESOLVER  @tanstack/react-query@catalog: isn't supported by any available resolver.
+
+This error happened while installing a direct dependency of /Users/suyeoncha/Documents/Projects/frame/artifacts/alarm-app
+suyeoncha@mac frame % npm install -g pnpm@10
+
+changed 1 package in 602ms
+
+1 package is looking for funding
+  run `npm fund` for details
+suyeoncha@mac frame % pnpm install          
+Scope: all 9 workspace projects
+ WARN  Ignoring broken lockfile at /Users/suyeoncha/Documents/Projects/frame: Lockfile /Users/suyeoncha/Documents/Projects/frame/pnpm-lock.yaml not compatible with current pnpm
+/Users/suyeoncha/Documents/Projects/frame/artifacts/alarm-app:
+ ERR_PNPM_SPEC_NOT_SUPPORTED_BY_ANY_RESOLVER  @tanstack/react-query@catalog: isn't supported by any available resolver.
+
+This error happened while installing a direct dependency of /Users/suyeoncha/Documents/Projects/frame/artifacts/alarm-app
+suyeoncha@mac frame % 
